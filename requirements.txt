@@ -23,3 +23,7 @@ genson
 shutup
 python-igraph
 coolname
+jsonschema
+omegaconf
+botocore
+boto3

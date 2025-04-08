@@ -1,5 +1,6 @@
 # path to the task data directory
 data_dir: "data"
+preprocess_data: False
 
 goal: null
 eval: null
