@@ -88,7 +88,7 @@ Relevant tree search config parameters are:
   - `debug_prob`: probability of debugging nodes
   - `num_drafts`: the number of root nodes at the beginning (the number of trees to grow) during Stage 1.
 
-An example command to run AI-Scientist-v2 on one of the generated ideas:
+An example command to run AI-Scientist-v2 on one of the generated ideas (please take a look at bfts_config.yaml for tree search parameters, which includes claude-3-5-sonnet):
 <pre><code>python launch_scientist_bfts.py \
  --load_ideas "ai_scientist/ideas/i_cant_believe_its_not_better.json" \
  --load_code \
