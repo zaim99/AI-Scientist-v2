@@ -12,7 +12,9 @@ MAX_NUM_TOKENS = 4096
 AVAILABLE_VLMS = [
     "gpt-4o-2024-05-13",
     "gpt-4o-2024-08-06",
+    "gpt-4o-2024-11-20",
     "gpt-4o-mini-2024-07-18",
+    "o3-mini",
 ]
 
 
@@ -56,10 +58,7 @@ def make_llm_call(client, model, temperature, system_message, prompt):
                 *prompt,
             ],
             temperature=1,
-            # max_completion_tokens=MAX_NUM_TOKENS,
             n=1,
-            # stop=None,
-            # reasoning_effort="high",
             seed=0,
         )
     else:
@@ -108,11 +107,7 @@ def get_response_from_vlm(
     if msg_history is None:
         msg_history = []
 
-    if model in [
-        "gpt-4o-2024-05-13",
-        "gpt-4o-2024-08-06",
-        "gpt-4o-mini-2024-07-18",
-    ]:
+    if model in AVAILABLE_VLMS:
         # Convert single image path to list for consistent handling
         if isinstance(image_paths, str):
             image_paths = [image_paths]
@@ -135,15 +130,6 @@ def get_response_from_vlm(
         # Construct message with all images
         new_msg_history = msg_history + [{"role": "user", "content": content}]
 
-        # response = client.chat.completions.create(
-        #     model=model,
-        #     messages=[
-        #         {"role": "system", "content": system_message},
-        #         *new_msg_history,
-        #     ],
-        #     temperature=temperature,
-        #     max_tokens=MAX_NUM_TOKENS,
-        # )
         response = make_vlm_call(
             client,
             model,
@@ -174,6 +160,7 @@ def create_client(model: str) -> tuple[Any, str]:
     if model in [
         "gpt-4o-2024-05-13",
         "gpt-4o-2024-08-06",
+        "gpt-4o-2024-11-20",
         "gpt-4o-mini-2024-07-18",
         "o3-mini",
     ]:
@@ -252,7 +239,9 @@ def get_batch_responses_from_vlm(
     if model in [
         "gpt-4o-2024-05-13",
         "gpt-4o-2024-08-06",
+        "gpt-4o-2024-11-20",
         "gpt-4o-mini-2024-07-18",
+        "o3-mini",
     ]:
         # Convert single image path to list
         if isinstance(image_paths, str):
